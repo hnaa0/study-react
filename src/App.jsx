@@ -1,10 +1,12 @@
 import "./App.css";
-import Slider from "./components/slider";
+import ButtonSlider from "./components/ButtonSlider";
+import InfiniteRollingSlider from "./components/InfiniteRollingSlider";
 
 function App() {
   return (
     <>
-      <Slider />
+      <InfiniteRollingSlider />
+      <ButtonSlider />
     </>
   );
 }
