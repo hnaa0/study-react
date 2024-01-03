@@ -1,18 +1,49 @@
 import styled from "styled-components";
 import slideImages from "../slideImages";
+import { useEffect, useState } from "react";
 
 export default function InfiniteSlider() {
+  const [imgNum, setImgNum] = useState(1);
+  const [carouselTransition, setCarouselTransition] = useState(
+    "transform 1.5s ease-in-out"
+  );
   const slideImgCarouselArr = [
     slideImages[slideImages.length - 1],
     ...slideImages,
     slideImages[0],
   ];
 
+  const handleSlide = (num) => {
+    setTimeout(() => {
+      setImgNum(num);
+      setCarouselTransition("");
+    }, 1500);
+  };
+
+  useEffect(() => {
+    if (imgNum == slideImgCarouselArr.length - 1) handleSlide(1);
+    else if (imgNum == 0) handleSlide(slideImgCarouselArr.length - 2);
+  }, [slideImgCarouselArr.length, imgNum]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setImgNum((prev) => prev + 1);
+      setCarouselTransition("transform 1.5s ease-in-out");
+    }, 3500);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
     <Container>
       <SlideTitle>Infinite Carousel</SlideTitle>
       <SlideContainer>
-        <SlideBox>
+        <SlideBox
+          $imgTransform={imgNum}
+          $carouselTransition={carouselTransition}
+        >
           {slideImgCarouselArr.map((slideImage, idx) => {
             return (
               <SlideImg
@@ -75,23 +106,25 @@ const SlideContainer = styled.div`
   position: relative;
   width: 800px;
   height: 400px;
-  //   overflow: hidden;
-  border: 1px solid red;
+  overflow: hidden;
 `;
 
 const SlideBox = styled.div`
   display: flex;
+  flex-wrap: nowrap;
   height: 100%;
   width: 100%;
-  transition: 500ms ease-in-out;
-  transform: translateX(-100%);
+  transition: ${(props) => props.$carouselTransition};
+  transform: translateX(${(props) => `-${props.$imgTransform}00%`});
 `;
 
 const SlideImg = styled.img`
-  width: 100%;
+  flex-shrink: 0;
+  width: 800px;
   height: auto;
   object-fit: cover;
   transition: 0.2s;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.9;
