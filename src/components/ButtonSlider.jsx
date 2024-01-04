@@ -71,12 +71,12 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
+  margin-bottom: 100px;
 `;
 
 const SlideTitle = styled.h1`
-  font-size: 48px;
-  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 20px;
 `;
 
 const SlideContainer = styled.div`
@@ -98,7 +98,7 @@ const SlideImg = styled.img`
   object-fit: cover;
   margin: 0 8px;
   border-radius: 8px;
-  transition: 0.2s;
+  transition: 0.5s;
   transform: translateX(${(props) => `${props.$slidemove}px`});
 
   &:hover {
@@ -118,11 +118,9 @@ const Btn = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: none;
   background-color: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   color: #afc8ad;
-  cursor: pointer;
 
   &:hover {
     background-color: #afc8ad;

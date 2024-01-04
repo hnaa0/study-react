@@ -3,7 +3,7 @@ import slideImages from "../slideImages";
 
 export default function InfiniteRollingSlider() {
   return (
-    <>
+    <Container>
       <SlideTitle>Infinite rolling Slide</SlideTitle>
       <SlideContainer>
         <SlideGroup>
@@ -31,7 +31,7 @@ export default function InfiniteRollingSlider() {
           </SlideBox2>
         </SlideGroup>
       </SlideContainer>
-    </>
+    </Container>
   );
 }
 
@@ -60,9 +60,17 @@ const infiniteAnimation2 = keyframes`
   }
 `;
 
+const Container = styled.section`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+`;
+
 const SlideTitle = styled.h1`
-  font-size: 48px;
-  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 20px;
 `;
 
 const SlideContainer = styled.div`
