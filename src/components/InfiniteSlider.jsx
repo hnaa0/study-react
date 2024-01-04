@@ -13,6 +13,15 @@ export default function InfiniteSlider() {
     slideImages[0],
   ];
 
+  const handleBtn = (direc) => {
+    if (direc == "prev") {
+      setImgNum((prev) => prev - 1);
+    } else {
+      setImgNum((prev) => prev + 1);
+    }
+    setCarouselTransition("transform 1.5s ease-in-out");
+  };
+
   const handleSlide = (num) => {
     setTimeout(() => {
       setImgNum(num);
@@ -54,7 +63,11 @@ export default function InfiniteSlider() {
             );
           })}
         </SlideBox>
-        <PrevBtn>
+        <PrevBtn
+          onClick={() => {
+            handleBtn("prev");
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -69,7 +82,11 @@ export default function InfiniteSlider() {
             />
           </svg>
         </PrevBtn>
-        <NextBtn>
+        <NextBtn
+          onClick={() => {
+            handleBtn("next");
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
