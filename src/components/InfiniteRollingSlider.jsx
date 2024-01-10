@@ -71,12 +71,21 @@ const Container = styled.section`
 const SlideTitle = styled.h1`
   font-size: 40px;
   margin-bottom: 20px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 28px;
+  }
 `;
 
 const SlideContainer = styled.div`
   width: 1000px;
   height: 300px;
   overflow: hidden;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 90vw;
+    height: 200px;
+  }
 `;
 
 const SlideGroup = styled.div`

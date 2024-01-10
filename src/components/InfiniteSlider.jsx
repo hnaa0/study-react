@@ -117,6 +117,10 @@ const Container = styled.section`
 const SlideTitle = styled.h1`
   font-size: 40px;
   margin-bottom: 20px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 28px;
+  }
 `;
 
 const SlideContainer = styled.div`
@@ -124,6 +128,11 @@ const SlideContainer = styled.div`
   width: 800px;
   height: 400px;
   overflow: hidden;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 90vw;
+    height: 200px;
+  }
 `;
 
 const SlideBox = styled.div`
@@ -137,7 +146,7 @@ const SlideBox = styled.div`
 
 const SlideImg = styled.img`
   flex-shrink: 0;
-  width: 800px;
+  width: 100%;
   height: auto;
   object-fit: cover;
   transition: 0.2s;
@@ -165,6 +174,12 @@ const Btn = styled.button`
   &:hover {
     background-color: #afc8ad;
     color: #ffffff;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    bottom: 70px;
+    width: 30px;
+    height: 30px;
   }
 `;
 
