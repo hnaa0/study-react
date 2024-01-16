@@ -4,10 +4,22 @@ import { useState } from "react";
 
 export default function ButtonSlider() {
   const [slideMove, setSlideMove] = useState(0);
+  const imgArrlength = slideImages.length;
+  const slideBoxWidth = 216 * imgArrlength;
+  const sectionWidth = window.innerWidth * 0.9;
+
   const toNext = () => {
+    if (window.innerWidth <= 765) {
+      slideMove > -slideBoxWidth && setSlideMove((prev) => prev - sectionWidth);
+      return;
+    }
     slideMove > -2128 && setSlideMove((prev) => prev - 1064);
   };
   const toPrev = () => {
+    if (window.innerWidth <= 765) {
+      slideMove < 0 && setSlideMove((prev) => prev + sectionWidth);
+      return;
+    }
     slideMove < 0 && setSlideMove((prev) => prev + 1064);
   };
 
@@ -15,52 +27,54 @@ export default function ButtonSlider() {
     <Container>
       <SlideTitle>Slide with Button</SlideTitle>
       <SlideContainer>
-        <SlideBox>
-          {slideImages.map((slideImage) => {
-            return (
-              <SlideImg
-                $slidemove={slideMove}
-                key={slideImage.title}
-                src={slideImage.img}
-                alt={slideImage.title}
-              ></SlideImg>
-            );
-          })}
-        </SlideBox>
-        {slideMove !== 0 && (
-          <PrevBtn onClick={toPrev}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-arrow-left"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-              />
-            </svg>
-          </PrevBtn>
-        )}
-        {slideMove !== -1064 && (
-          <NextBtn onClick={toNext}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-arrow-right"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-              />
-            </svg>
-          </NextBtn>
-        )}
+        <SlideGroup>
+          <SlideBox>
+            {slideImages.map((slideImage) => {
+              return (
+                <SlideImg
+                  $slidemove={slideMove}
+                  key={slideImage.title}
+                  src={slideImage.img}
+                  alt={slideImage.title}
+                ></SlideImg>
+              );
+            })}
+          </SlideBox>
+          {slideMove !== 0 && (
+            <PrevBtn onClick={toPrev}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-arrow-left"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                />
+              </svg>
+            </PrevBtn>
+          )}
+          {slideMove !== -slideBoxWidth && slideMove > -slideBoxWidth && (
+            <NextBtn onClick={toNext}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-arrow-right"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                />
+              </svg>
+            </NextBtn>
+          )}
+        </SlideGroup>
       </SlideContainer>
     </Container>
   );
@@ -77,18 +91,33 @@ const Container = styled.section`
 const SlideTitle = styled.h1`
   font-size: 40px;
   margin-bottom: 20px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 28px;
+  }
 `;
 
 const SlideContainer = styled.div`
   width: 1064px;
   height: 300px;
   overflow: hidden;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 90vw;
+    height: 200px;
+  }
+`;
+
+const SlideGroup = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 4px 0;
 `;
 
 const SlideBox = styled.div`
   display: flex;
   height: 100%;
-  width: 100%;
   padding: 4px 0;
 `;
 
@@ -126,11 +155,23 @@ const Btn = styled.button`
     background-color: #afc8ad;
     color: #ffffff;
   }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    bottom: 60px;
+  }
 `;
 
 const PrevBtn = styled(Btn)`
   left: -20px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    left: -15px;
+  }
 `;
 const NextBtn = styled(Btn)`
   right: -20px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    right: -15px;
+  }
 `;
