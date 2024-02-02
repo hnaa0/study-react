@@ -100,6 +100,9 @@ const Container = styled.section`
   flex-direction: column;
   align-items: center;
   margin-bottom: 100px;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 90vw;
 `;
 
 const SlideTitle = styled.h1`
@@ -120,6 +123,10 @@ const SlideContainer = styled.div`
     width: 90vw;
     height: 200px;
   }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 90vw;
+  }
 `;
 
 const SlideGroup = styled.div`
@@ -133,6 +140,10 @@ const SlideBox = styled.div`
   display: flex;
   height: 100%;
   padding: 4px 0;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 90vw;
+  }
 `;
 
 const SlideImg = styled.img`

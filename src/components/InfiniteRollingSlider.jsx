@@ -66,6 +66,10 @@ const Container = styled.section`
   flex-direction: column;
   align-items: center;
   margin-bottom: 100px;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 90vw;
+  }
 `;
 
 const SlideTitle = styled.h1`
@@ -85,6 +89,10 @@ const SlideContainer = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     width: 90vw;
     height: 200px;
+  }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 90vw;
   }
 `;
 
