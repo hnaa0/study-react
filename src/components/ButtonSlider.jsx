@@ -14,14 +14,14 @@ export default function ButtonSlider() {
     const value = e.currentTarget.value;
 
     if (value === "next") {
-      if (viewWidth <= 765) {
+      if (viewWidth <= 1023) {
         slideMove > -slideBoxWidth &&
           setSlideMove((prev) => prev - sectionWidth);
         return;
       }
       slideMove > -2128 && setSlideMove((prev) => prev - 1064);
     } else if (value === "prev") {
-      if (window.innerWidth <= 765) {
+      if (window.innerWidth <= 1023) {
         slideMove < 0 && setSlideMove((prev) => prev + sectionWidth);
         return;
       }
@@ -31,11 +31,15 @@ export default function ButtonSlider() {
 
   useEffect(() => {
     const handleViewWidth = () => {
-      setViewWidth(viewWidth);
+      setSlideMove(0);
+      setViewWidth(window.innerWidth);
     };
-
-    handleViewWidth();
-  }, [viewWidth]);
+    window.addEventListener("resize", handleViewWidth);
+    // 언마운트 시
+    return () => {
+      window.removeEventListener("resize", handleViewWidth);
+    };
+  }, []);
 
   return (
     <Container>
@@ -140,10 +144,6 @@ const SlideBox = styled.div`
   display: flex;
   height: 100%;
   padding: 4px 0;
-
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 90vw;
-  }
 `;
 
 const SlideImg = styled.img`
