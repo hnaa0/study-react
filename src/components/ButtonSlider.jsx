@@ -1,27 +1,41 @@
 import styled from "styled-components";
 import slideImages from "../slideImages";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ButtonSlider() {
   const [slideMove, setSlideMove] = useState(0);
+  const [viewWidth, setViewWidth] = useState(window.innerWidth);
   const imgArrlength = slideImages.length;
   const slideBoxWidth = 216 * imgArrlength;
-  const sectionWidth = window.innerWidth * 0.9;
+  const sectionWidth = viewWidth * 0.9;
 
-  const toNext = () => {
-    if (window.innerWidth <= 765) {
-      slideMove > -slideBoxWidth && setSlideMove((prev) => prev - sectionWidth);
-      return;
+  const handleBtn = (e) => {
+    e.stopPropagation();
+    const value = e.currentTarget.value;
+
+    if (value === "next") {
+      if (viewWidth <= 765) {
+        slideMove > -slideBoxWidth &&
+          setSlideMove((prev) => prev - sectionWidth);
+        return;
+      }
+      slideMove > -2128 && setSlideMove((prev) => prev - 1064);
+    } else if (value === "prev") {
+      if (window.innerWidth <= 765) {
+        slideMove < 0 && setSlideMove((prev) => prev + sectionWidth);
+        return;
+      }
+      slideMove < 0 && setSlideMove((prev) => prev + 1064);
     }
-    slideMove > -2128 && setSlideMove((prev) => prev - 1064);
   };
-  const toPrev = () => {
-    if (window.innerWidth <= 765) {
-      slideMove < 0 && setSlideMove((prev) => prev + sectionWidth);
-      return;
-    }
-    slideMove < 0 && setSlideMove((prev) => prev + 1064);
-  };
+
+  useEffect(() => {
+    const handleViewWidth = () => {
+      setViewWidth(viewWidth);
+    };
+
+    handleViewWidth();
+  }, [viewWidth]);
 
   return (
     <Container>
@@ -41,7 +55,7 @@ export default function ButtonSlider() {
             })}
           </SlideBox>
           {slideMove !== 0 && (
-            <PrevBtn onClick={toPrev}>
+            <PrevBtn onClick={handleBtn} value="prev">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -58,7 +72,7 @@ export default function ButtonSlider() {
             </PrevBtn>
           )}
           {slideMove !== -slideBoxWidth && slideMove > -slideBoxWidth && (
-            <NextBtn onClick={toNext}>
+            <NextBtn onClick={handleBtn} value="next">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
