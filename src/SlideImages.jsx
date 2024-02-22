@@ -1,5 +1,3 @@
-import DOG from "";
-
 const slideImages = [
   {
     title: "dog",
