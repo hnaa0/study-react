@@ -144,7 +144,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-`])));fd(Ea||(Ea=pd(["",""],["",""])),hd);var xa,Ea;const V0="/assets/EF_watermelonSalad-eVUw5x2I.ttf",Q0=fd`
+`])));fd(Ea||(Ea=pd(["",""],["",""])),hd);var xa,Ea;const V0="/study-react/assets/EF_watermelonSalad-eVUw5x2I.ttf",Q0=fd`
   ${hd}
 
   @font-face {
