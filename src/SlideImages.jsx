@@ -1,35 +1,35 @@
 const slideImages = [
   {
     title: "dog",
-    img: "./src/images/3dogs.jpg",
+    img: "/images/3dogs.jpg",
   },
   {
     title: "beach",
-    img: "./src/images/beach.jpg",
+    img: "/images/beach.jpg",
   },
   {
     title: "breads",
-    img: "./src/images/breads.jpg",
+    img: "/images/breads.jpg",
   },
   {
     title: "fireworks",
-    img: "./src/images/fireworks.jpg",
+    img: "/images/fireworks.jpg",
   },
   {
     title: "fruits",
-    img: "./src/images/fruits.jpg",
+    img: "/images/fruits.jpg",
   },
   {
     title: "mountain",
-    img: "./src/images/mountain.jpg",
+    img: "/images/mountain.jpg",
   },
   {
     title: "street",
-    img: "./src/images/street.jpg",
+    img: "/images/street.jpg",
   },
   {
     title: "airplane",
-    img: "./src/images/airplane.jpg",
+    img: "/images/airplane.jpg",
   },
 ];
 
